@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Đèn Kéo Quân</title>
+    <style>
+        body {
+            background-color: #1a1a1a;
+            color: white;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        h1 { margin-bottom: 50px; color: #f1c40f; text-shadow: 0 0 10px rgba(241, 196, 15, 0.7); }
+        .back-link { position: absolute; top: 20px; left: 20px; color: white; text-decoration: none; font-size: 18px; border: 1px solid white; padding: 5px 15px; border-radius: 5px; transition: 0.3s; }
+        .back-link:hover { background: white; color: black; }
+
+        /* Không gian 3D */
+        .scene {
+            width: 250px;
+            height: 200px;
+            perspective: 1000px; /* Tạo độ sâu 3D */
+        }
+
+        /* Khung đèn kéo quân xoay tròn */
+        .carousel {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            transform-style: preserve-3d;
+            animation: xoayVong 20s infinite linear; /* Xoay vô tận */
+        }
+
+        /* 6 mặt của đèn - Đã cập nhật ảnh từ Pexels */
+        .panel {
+            position: absolute;
+            width: 230px;
+            height: 180px;
+            left: 10px;
+            top: 10px;
+            border: 3px solid #f1c40f;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 0 15px rgba(241, 196, 15, 0.4);
+            background: #000;
+        }
+
+        .panel img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Giúp ảnh không bị méo */
+        }
+
+        /* Tính toán góc quay 360 độ / 6 mặt = 60 độ mỗi mặt */
+        /* translateZ(250px) đẩy ảnh ra xa tâm 250px để tạo vòng tròn */
+        .panel:nth-child(1) { transform: rotateY(0deg) translateZ(250px); }
+        .panel:nth-child(2) { transform: rotateY(60deg) translateZ(250px); }
+        .panel:nth-child(3) { transform: rotateY(120deg) translateZ(250px); }
+        .panel:nth-child(4) { transform: rotateY(180deg) translateZ(250px); }
+        .panel:nth-child(5) { transform: rotateY(240deg) translateZ(250px); }
+        .panel:nth-child(6) { transform: rotateY(300deg) translateZ(250px); }
+
+        /* Hiệu ứng xoay tròn */
+        @keyframes xoayVong {
+            from { transform: rotateY(0deg); }
+            to { transform: rotateY(360deg); }
+        }
+    </style>
+</head>
+<body>
+
+    <a href="index.html" class="back-link">⬅ Quay về Portfolio</a>
+    <h1>Đèn Kéo Quân 3D - Pexels</h1>
+
+    <div class="scene">
+        <div class="carousel" id="den-keo-quan">
+            <div class="panel"><img src="https://images.pexels.com/photos/33202465/pexels-photo-33202465.jpeg" alt="Ảnh 1 Pexels"></div>
+            <div class="panel"><img src="https://images.pexels.com/photos/33151950/pexels-photo-33151950.jpeg" alt="Ảnh 2 Pexels"></div>
+            <div class="panel"><img src="https://images.pexels.com/photos/8691140/pexels-photo-8691140.jpeg" alt="Ảnh 3 Pexels"></div>
+            <div class="panel"><img src="https://images.pexels.com/photos/10942931/pexels-photo-10942931.jpeg" alt="Ảnh 4 Pexels"></div>
+            <div class="panel"><img src="https://images.pexels.com/photos/3828097/pexels-photo-3828097.jpeg" alt="Ảnh 5 Pexels"></div>
+            <div class="panel"><img src="https://images.pexels.com/photos/26355884/pexels-photo-26355884.jpeg" alt="Ảnh 6 Pexels"></div>
+        </div>
+    </div>
+
+    <script>
+        const den = document.getElementById('den-keo-quan');
+
+        // Khi rê chuột vào: Dừng xoay
+        den.addEventListener('mouseover', function() {
+            den.style.animationPlayState = 'paused';
+        });
+
+        // Khi đưa chuột ra: Tiếp tục xoay
+        den.addEventListener('mouseout', function() {
+            den.style.animationPlayState = 'running';
+        });
+    </script>
+
+</body>
+</html>
